@@ -3,20 +3,6 @@
     padding: 0px;
 }
 
-/*header{
-    background-color: #ccc;
-    display: flex;
-}
-nav{
-    margin: 30px;
-    width: 70%;
-}
-nav a{
-    margin: 0px 10px;
-    text-decoration: none;
-    color: white;
-    font-size: 20px;
-}*/
 .login{
     text-align: right;
     padding-right: 30px;
@@ -42,23 +28,6 @@ nav a{
 .githubLink svg{
     margin: 0px 5px;
 }
-/*footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 10vb;
-    text-align: center;
-    width: 100%;
-    background-color: #272727;
-
-}
-footer p{
-    color: white;
-    font-size: 20px;
-}
-*/
-/*main*/
-
 main{
 
 }
@@ -295,4 +264,17 @@ main{
 }
 .usersTable td a{
     text-decoration: none;
+}
+
+@media (max-width: 700px){
+    .moreinfoCard{
+        width: 95%;
+    }
+    .commentsBlock{
+        width: 95%;
+    }
+    .authForm{
+        height: auto;
+        width: 100%;
+    }
 }
