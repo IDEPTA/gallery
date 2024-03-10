@@ -31,6 +31,8 @@ class PostFactory extends Factory
                 "4.png",
                 "5.png",
             ]),
+            'created_at' => fake()->date(),
+            'updated_at' => fake()->date(),
         ];
     }
 }

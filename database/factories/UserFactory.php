@@ -29,7 +29,6 @@ class UserFactory extends Factory
             'email' => fake()->safeEmail(),
             'phone' => fake()->phoneNumber(),
             'password' => static::$password ??= Hash::make('password'),
-            
         ];
     }
 

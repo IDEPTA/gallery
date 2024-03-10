@@ -18,12 +18,11 @@ class Controller extends BaseController
     use AuthorizesRequests, ValidatesRequests;
     public function index()
     {
-        $data = Post::with(['user'])->orderBy("date", "DESC")->get();
+        $data = Post::with(['user'])->orderBy("created_at", "DESC")->get();
         return view("welcome", ["data" => $data]);
     }
     public function search(Request $req)
     {
-        //dd($req);
         $day = date('Y-m-d');
         $search = $req['search'];
         $result = Post::with(['user'])
@@ -37,22 +36,22 @@ class Controller extends BaseController
         });
         switch ($req['sort']) {
             case 'new':
-                $result = $result->orderBy("date", "DESC")->get();
+                $result = $result->orderBy("created_at", "DESC")->get();
                 break;
             case 'old':
-                $result = $result->orderBy("date", "ASC")->get();
+                $result = $result->orderBy("created_at", "ASC")->get();
                 break;
             case 'day':
                 $result = $result->where([
-                    ["date",'>=',$day." 00:00:00"],
-                    ["date",'<=',$day." 23:59:59"],
+                    ["created_at",'>=',$day." 00:00:00"],
+                    ["created_at",'<=',$day." 23:59:59"],
                 ])->get();
                 break;
             case 'month':
-                $result = $result->whereMonth("date", "2")->get();
+                $result = $result->whereMonth("created_at", "2")->get();
                 break;
             case 'year':
-                $result = $result->whereYear("date", date("Y"))->get();
+                $result = $result->whereYear("created_at", date("Y"))->get();
                 break;
             default:
                 break;
@@ -64,7 +63,7 @@ class Controller extends BaseController
         $id = $req['id'];
         $data = Post::find($id);
 
-        $comments = Comment::with('user')->where("post_id", $data->id)->orderBy("created_at", "DESC")->get();
+        $comments = Comment::with('user')->where("post_id", $data->id)->orderBy("created_at", "ASC")->get();
         return view("posts.moreinfo", ["data" => $data, "comments" => $comments]);
     }
     public function showUserpage(Request $req)

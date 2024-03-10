@@ -12,7 +12,7 @@
                 alt="картинка"></a>
         <h2>{{ $data->title }}</h2>
         <p>{{ $data->text }}</p>
-        <p>Опубликовано: {{ $data->date }} </p>
+        <p>Опубликовано: {{ $data->created_at }} </p>
         @if ($data->user->id == Auth::id() || Auth::guard('admin')->user())
             <p>
                 <a href={{ route('editform', ['post_id' => $data->id]) }}>Изменить</a>

@@ -3,7 +3,7 @@
             
             <img src={{ asset("storage/img/".$item->img)}} alt="картинка">
             <p>{{$item->title}} </p>
-            <p>Дата: {{$item->date}} </p>
+            <p>Дата: {{$item->created_at}} </p>
             <p>Автор: <br> {{$item->user->email}}</p>
     </a>
     @if ($item->user->id == Auth::id() || Auth::guard("admin")->user())

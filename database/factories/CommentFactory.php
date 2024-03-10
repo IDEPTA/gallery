@@ -24,6 +24,9 @@ class CommentFactory extends Factory
             "user_id" => fake()->randomElement($users),
             "post_id" => fake()->randomElement($posts),
             "text" => fake()->text(100),
+            'created_at' => fake()->date(),
+            'updated_at' => fake()->date(),
         ];
+
     }
 }

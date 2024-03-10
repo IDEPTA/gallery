@@ -48,7 +48,6 @@ class AuthController extends DefaultController
     public function githubCallback()
     {
         $githubUser = Socialite::driver('github')->user();
-
         $user = User::where('github_id', $githubUser->id)->first();
 
         if (!$user) {
