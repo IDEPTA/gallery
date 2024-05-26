@@ -20,7 +20,8 @@ class Service
         $remember = isset($req["remember"]);
         $data = $req->validated();
         if (
-            Auth::guard("admin")->attempt($data, $remember) ||  Auth::guard("web")->attempt($data, $remember)) {
+            Auth::guard("admin")->attempt($data, $remember) ||  Auth::guard("web")->attempt($data, $remember)
+        ) {
             return true;
         } else {
             return false;

@@ -26,14 +26,14 @@ class Controller extends BaseController
         $day = date('Y-m-d');
         $search = $req['search'];
         $result = Post::with(['user'])
-        ->where(function ($query) use ($search) {
-            $query->where("title", "like", "%$search%")
-                ->orWhere("description", "like", "%$search%")
-                ->orWhere("text", "like", "%$search%")
-                ->orWhereHas('user', function ($query) use ($search) {
-                    $query->where('email', 'like', "%$search%");
-                });
-        });
+            ->where(function ($query) use ($search) {
+                $query->where("title", "like", "%$search%")
+                    ->orWhere("description", "like", "%$search%")
+                    ->orWhere("text", "like", "%$search%")
+                    ->orWhereHas('user', function ($query) use ($search) {
+                        $query->where('email', 'like', "%$search%");
+                    });
+            });
         switch ($req['sort']) {
             case 'new':
                 $result = $result->orderBy("created_at", "DESC")->get();
@@ -43,8 +43,8 @@ class Controller extends BaseController
                 break;
             case 'day':
                 $result = $result->where([
-                    ["created_at",'>=',$day." 00:00:00"],
-                    ["created_at",'<=',$day." 23:59:59"],
+                    ["created_at", '>=', $day . " 00:00:00"],
+                    ["created_at", '<=', $day . " 23:59:59"],
                 ])->get();
                 break;
             case 'month':

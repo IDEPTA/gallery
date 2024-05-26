@@ -18,7 +18,8 @@ return new class extends Migration
             $table->text('text');
             $table->text('img');
             $table->foreignId('user_id')->constrained()->onUpdate('cascade')
-      ->onDelete('cascade');
+                ->onDelete('cascade');
+            $table->integer("price")->nullable();
             $table->timestamps();
         });
     }

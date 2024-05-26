@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
-
+use App\Http\Controllers\BascketController;
 use App\Http\Controllers\Crud\PostController;
 use App\Http\Controllers\Crud\CommentController;
 /*
@@ -19,8 +19,9 @@ use App\Http\Controllers\Crud\CommentController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('/', [Controller::class, 'index'])->name('home');
-Route::post("/search",[Controller::class, 'search'])->name("search");
+Route::post("/search", [Controller::class, 'search'])->name("search");
 //show forms
 
 //login/register_process
@@ -32,6 +33,8 @@ Route::post("register_process", [AuthController::class, "register_process"])->na
 
 Route::middleware(["auth:web,admin"])->group(function () {
     Route::get("moreinfo/{id}", [Controller::class, 'showMoreInfo'])->name("moreinfo");
+    Route::get("basket/{id}", [BascketController::class, 'getBasket'])->name("basket");
+    Route::get("addToBasket/{id}", [BascketController::class, 'store'])->name("addToBasket");
     Route::get("userpage/{id}", [Controller::class, 'showUserpage'])->name("userpage");
     Route::get("logout", [AuthController::class, "logout"])->name("logout");
     Route::post("create/{id}", [CommentController::class, "create"])->name("create");
@@ -45,8 +48,6 @@ Route::middleware(["auth:web,admin"])->group(function () {
     Route::get("editform/{post_id}", [PostController::class, "editForm"])->name("editform");
 
     Route::post("editPost/{post_id}", [PostController::class, "edit"])->name("editPost");
-    
-
 });
 
 Route::middleware("guest")->group(function () {
@@ -62,5 +63,5 @@ Route::middleware("guest")->group(function () {
 
 require __DIR__ . '/admin.php';
 
-//<input type="hidden" name="_token" 
+//<input type="hidden" name="_token"
 //value="GQeWu77lHnyZUJFne0uqylVLMmNDtXBAOvnVX591" autocomplete="off">

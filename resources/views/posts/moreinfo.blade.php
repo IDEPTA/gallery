@@ -20,11 +20,12 @@
         @endif
         <span class="cardsLinks">
             <a href={{ route('userpage', ['id' => $data->user]) }}>Автор: {{ $data->user->email }} </a>
+            <a href={{ route('addToBasket', ['id' => $data->id]) }}>Приобрести</a>
             <a href={{ route('home') }}>Назад</a>
         </span>
     </div>
     <div class="commentsBlock">
-        @if (Auth::guard('web')->user())
+        {{-- @if (Auth::guard('web')->user())
             <form method="POST" action={{ route('create', ['id' => $data->id]) }} class="inputBlock">
                 @csrf
                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" type="text" placeholder="Ваш комментарий"
@@ -34,14 +35,14 @@
                     <p>{{ $message }}</p>
                 @enderror
             </form>
-        @endif
+        @endif --}}
 
-        @if (isset($comments))
+        {{-- @if (isset($comments))
             @foreach ($comments as $item)
                 <div class="comment">
                     <a href={{ route('userpage', ['id' => $item->user->id]) }}> {{ $item->user->email }}: </a>
                     <p>
-                        <form 
+                        <form
                         action ={{ route('editComment', [
                             'comment_id' => $item->id,
                             'post_id' => $data->id,
@@ -51,7 +52,7 @@
                             <textarea type="text" name='text' class="commentEditInput" disabled required>{{ $item->text }}</textarea>
                             <input type="submit" class='btn btn-success hiddenSubmit' value="Сохранить" hidden>
                         </form>
-                        
+
                         <br>Дата публикации: {{ $item->created_at }}
                     </p>
 
@@ -68,6 +69,6 @@
                     @endif
                 </div>
             @endforeach
-        @endif
+        @endif --}}
     </div>
 @endsection
