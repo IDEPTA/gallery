@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  # Laravel Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php
+    volumes:
+      - .:/var/www/html
+      - .:/var/www/html/public
+    ports:
+      - "8080:80"
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+    depends_on:
+      - mysql
+    networks:
+      - laravel-net
+
+  # MySQL Database
+  mysql:
+    image: mysql:8
+    container_name: laravel-mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=galleryDB
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    networks:
+      - laravel-net
+
+networks:
+  laravel-net:
